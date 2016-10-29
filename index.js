@@ -66,3 +66,9 @@ bot.onText(/\/del (.+)/, function(msg, match) {
 
 	bot.sendMessage(chat, result);
 });
+
+bot.onText(/\/end/, function(msg, match) {
+	var chat = msg.chat.id;
+	pizzaArray = [];
+	bot.sendMessage(chat, "Sagt einfach bescheid, wenn ihr wieder was zum Essen wollt ;-)");
+});
