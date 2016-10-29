@@ -72,3 +72,14 @@ bot.onText(/\/end/, function(msg, match) {
 	pizzaArray = [];
 	bot.sendMessage(chat, "Sagt einfach bescheid, wenn ihr wieder was zum Essen wollt ;-)");
 });
+
+bot.onText(/\/help/, function(msg) {
+	var chat = msg.chat.id;
+	var resp = "Ich biete folgende Befehle an:\n\n";
+	resp += "/help\t listet alle Befehle auf\n";
+	resp += "/add [Name der Pizza]\t fügt der Liste eine Pizza hinzu\n";
+	resp += "/del [Dein username]\t löscht deine aktuell bestellte Pizza\n";
+	resp += "/getMeThePizza\t gibt eine Liste mit allen bestellten Pizzen aus\n";
+	resp += "/end\t löscht die gesamte Liste\n";
+	bot.sendMessage(chat, resp);
+});
