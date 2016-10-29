@@ -49,3 +49,20 @@ bot.onText(/\/getMeThePizza/, function(msg, match) {
 	}
 	bot.sendMessage(chat, result);
 });
+
+bot.onText(/\/del (.+)/, function(msg, match) {
+	var chat = msg.chat.id;
+	var username = match[1];
+
+	var index = pizzaArray.findIndex(function(obj) {
+		return obj.username == username;
+	});
+
+	if (index > -1) {
+    if(pizzaArray.splice(index, 1)) {
+			var result = "Die Pizza von " + username + " hab ich gelöscht"
+		};
+	};
+
+	bot.sendMessage(chat, result);
+});
