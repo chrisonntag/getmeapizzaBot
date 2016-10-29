@@ -1,0 +1,35 @@
+{
+  "name": "getmeapizzabot",
+  "version": "0.1.0",
+  "description": "Telegram bot for adding pizza to a list",
+  "main": "index.js",
+  "scripts": {
+    "setup": "node setup.js",
+    "test": "node_modules/.bin/mocha -w",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisonntag/getmeapizzaBot.git"
+  },
+  "keywords": [
+    "pizza",
+    "bot",
+    "telegram",
+    "fsinfo"
+  ],
+  "author": "chrisonntag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrisonntag/getmeapizzaBot/issues"
+  },
+  "homepage": "https://github.com/chrisonntag/getmeapizzaBot#readme",
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "fs": "0.0.1-security",
+    "node-telegram-bot-api": "^0.24.0"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2"
+  }
+}
