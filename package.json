@@ -1,0 +1,25 @@
+{
+  "name": "getmeapizzabot",
+  "version": "0.1.0",
+  "description": "Telegram bot for adding pizza to a list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisonntag/getmeapizzaBot.git"
+  },
+  "keywords": [
+    "pizza",
+    "bot",
+    "telegram",
+    "fsinfo"
+  ],
+  "author": "chrisonntag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chrisonntag/getmeapizzaBot/issues"
+  },
+  "homepage": "https://github.com/chrisonntag/getmeapizzaBot#readme"
+}
