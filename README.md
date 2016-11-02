@@ -12,4 +12,4 @@ This repository owns two branches by default
 `development`  
 `master`  
 
-Fork this repository and make a new feature branch out of development. Please try to make the smallest changes possible in your pull requests. I'll then merge your changes into development.
+Fork this repository and make a new feature branch out of development. Please try to make the smallest changes possible in your pull requests. I'll then may merge your changes into development. Test your shit before creating a pull request!
