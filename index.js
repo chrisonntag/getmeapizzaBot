@@ -1,5 +1,7 @@
 var TelegramBot = require('node-telegram-bot-api');
 var dotenv = require('dotenv');
+var fs = require('fs');
+var crawler = require('./lib/crawler.js');
 
 dotenv.load();
 
@@ -82,4 +84,41 @@ bot.onText(/\/help/, function(msg) {
 	resp += "/getMeThePizza\t gibt eine Liste mit allen bestellten Pizzen aus\n";
 	resp += "/end\t löscht die gesamte Liste\n";
 	bot.sendMessage(chat, resp);
+});
+
+
+function readContent(name, callback) {
+  fs.exists('./lib/out/'+name+'.json', function(exists) {
+    if (exists) {
+      fs.readFile('./lib/out/'+name+'.json', 'utf8', function(err, data) {
+        if(err) return callback(err);
+        data = JSON.parse(data);
+        keyboard = [];
+        for(var i=0;i<data.meals.length;i++) {
+          keyboard.push(['/add ' + data.meals[i].name + ': ' + data.meals[i].price]);
+        }
+        return callback(null, keyboard);    
+      });
+    } else {
+      return callback(err);
+   }
+  });
+}
+
+bot.onText(/\/padu/, function (msg) {
+    //save the chat id
+    var chatId = msg.chat.id;
+    
+    keyboard = [];
+    readContent('padu', function(err, data) {
+      keyboard = data;
+      var reply_markup = {
+        "keyboard": keyboard, 
+        "resize_keyboard": true
+      };
+      var opts = {
+        "reply_markup": JSON.stringify(reply_markup)
+      }
+      bot.sendMessage(chatId, "Welches Gericht willst du?", opts);
+    });
 });

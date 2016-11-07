@@ -1,8 +1,8 @@
 {
   "restaurants": {
-    "padu_innstrasse": {
+    "padu": {
       "url": "http://www.padu-innstrasse.de/speisekarte/",
-      "restaurant_name": "padu_innstrasse",
+      "restaurant_name": "padu",
       "container": ".av-catalogue-item",
       "name": ".av-catalogue-title",
       "price": ".av-catalogue-price"
