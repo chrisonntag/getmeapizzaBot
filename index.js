@@ -2,6 +2,7 @@ var TelegramBot = require('node-telegram-bot-api');
 var dotenv = require('dotenv');
 var fs = require('fs');
 var crawler = require('./lib/crawler.js');
+var conf = require("./lib/data.json");
 
 dotenv.load();
 
@@ -100,7 +101,14 @@ function readContent(name, callback) {
         return callback(null, keyboard);    
       });
     } else {
-      return callback(err);
+      data = conf.restaurants[name];
+      var cr = crawler.crawl(
+        data.url,
+        data.restaurant_name,
+        data.container,
+        data.name,
+        data.price
+      );
    }
   });
 }
