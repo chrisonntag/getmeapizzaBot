@@ -34,7 +34,7 @@ bot.onText(/\/add (.+)/, function (msg, match) {
 	console.log(pizzaArray);
 });
 
-bot.onText(/\/getMeThePizza/, function(msg, match) {
+bot.onText(/\/pizza/, function(msg, match) {
 	var chat = msg.chat.id;
 	var result = "";
 	if(typeof pizzaArray !== 'undefined' && pizzaArray.length > 0) {
@@ -82,8 +82,9 @@ bot.onText(/\/help/, function(msg) {
 	resp += "/help\t listet alle Befehle auf\n";
 	resp += "/add [Name der Pizza]\t fügt der Liste eine Pizza hinzu\n";
 	resp += "/del [Dein username]\t löscht deine aktuell bestellte Pizza\n";
-	resp += "/getMeThePizza\t gibt eine Liste mit allen bestellten Pizzen aus\n";
+	resp += "/pizza\t gibt eine Liste mit allen bestellten Pizzen aus\n";
 	resp += "/end\t löscht die gesamte Liste\n";
+  resp += "/padu|subway\t zeigt dir die Speisekarte des jeweiligen Restaurants\n";
 	bot.sendMessage(chat, resp);
 });
 
