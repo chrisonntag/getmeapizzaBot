@@ -94,32 +94,50 @@ function readContent(name, callback) {
       fs.readFile('./lib/out/'+name+'.json', 'utf8', function(err, data) {
         if(err) return callback(err);
         data = JSON.parse(data);
-        keyboard = [];
-        for(var i=0;i<data.meals.length;i++) {
-          keyboard.push(['/add ' + data.meals[i].name + ': ' + data.meals[i].price]);
-        }
-        return callback(null, keyboard);    
+        return callback(null, data.meals);    
       });
     } else {
-      data = conf.restaurants[name];
-      var cr = crawler.crawl(
-        data.url,
-        data.restaurant_name,
-        data.container,
-        data.name,
-        data.price
-      );
+      if(name != undefined) {
+        data = conf.restaurants[name];
+        var cr = crawler.crawl(
+          data.url,
+          data.restaurant_name,
+          data.container,
+          data.name,
+          data.price
+        );
+      }
    }
   });
 }
 
-bot.onText(/\/padu/, function (msg) {
-    //save the chat id
-    var chatId = msg.chat.id;
-    
+bot.onText(/\/padu/, function(msg) {
+    chatId = msg.chat.id;
+
     keyboard = [];
     readContent('padu', function(err, data) {
-      keyboard = data;
+      for(var i=0;i<data.length;i++) {
+        keyboard.push(['/add ' + data[i].name + ': ' + data[i].price]);
+      }
+      var reply_markup = {
+        "keyboard": keyboard, 
+        "resize_keyboard": true
+      };
+      var opts = {
+        "reply_markup": JSON.stringify(reply_markup)
+      }
+      bot.sendMessage(chatId, "Welches Gericht willst du?", opts);
+    });
+});
+
+bot.onText(/\/subway/, function(msg) {
+    chatId = msg.chat.id;
+
+    keyboard = [];
+    readContent('subway', function(err, data) {
+      for(var i=0;i<data.length;i++) {
+        keyboard.push(['/add ' + data[i].name + ': ' + data[i].price]);
+      }
       var reply_markup = {
         "keyboard": keyboard, 
         "resize_keyboard": true
