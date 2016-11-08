@@ -22,12 +22,13 @@ pizzaArray = [];
 bot.onText(/\/add (.+)/, function (msg, match) {
 	var user = msg.from.id;
  	var resp = match[1];
+  var username = msg.from.username || msg.from.first_name || msg.from.last_name;
 	pizzaArray.push(
 		{
 			id : msg.from.id,
 			first_name: msg.from.first_name,
 			last_name: msg.from.last_name,
-			username: msg.from.username,
+			username: username,
 			pizza: resp
 		}
 	);
