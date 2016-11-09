@@ -26,6 +26,7 @@ bot.onText(/\/add (.+)/, function (msg, match) {
 	pizzaArray.push(
 		{
 			id : msg.from.id,
+      chat_id: msg.chat.id,
 			first_name: msg.from.first_name,
 			last_name: msg.from.last_name,
 			username: username,
@@ -40,13 +41,15 @@ bot.onText(/\/pizza/, function(msg, match) {
 	var result = "";
 	if(typeof pizzaArray !== 'undefined' && pizzaArray.length > 0) {
 		for(var i=0;i<pizzaArray.length;i++) {
-			if((pizzaArray[i].first_name != undefined) && (pizzaArray[i].last_name != undefined)) {
-				result += pizzaArray[i].first_name + " " + pizzaArray[i].last_name + ": ";
-				result += pizzaArray[i].pizza + "\n";
-			} else {
-				result += pizzaArray[i].username + ": ";
-				result += pizzaArray[i].pizza + "\n";
-			}
+      if(pizzaArray[i].chat_id == chat) {
+        if((pizzaArray[i].first_name != undefined) && (pizzaArray[i].last_name != undefined)) {
+          result += pizzaArray[i].first_name + " " + pizzaArray[i].last_name + ": ";
+          result += pizzaArray[i].pizza + "\n";
+        } else {
+          result += pizzaArray[i].username + ": ";
+          result += pizzaArray[i].pizza + "\n";
+        }
+      }
 		}
 	} else {
 		result = "Es wurde noch keine Pizza bestellt ... :D";
