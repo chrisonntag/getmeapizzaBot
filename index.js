@@ -18,6 +18,7 @@ var bot = new TelegramBot(token, {polling: true});
 
 pizzaArray = [];
 
+// Matches /start
 bot.onText(/\/add (.+)/, function (msg, match) {
 	var user = msg.from.id;
  	var resp = match[1];
@@ -51,7 +52,7 @@ bot.onText(/\/pizza/, function(msg, match) {
       }
 		}
 	} else {
-		result = "Es wurde noch keine Pizza bestellt ... :D";
+		result = "Es wurde noch keine Pizza bestellt :(";
 	}
 	bot.sendMessage(chat, result);
 });
@@ -66,7 +67,7 @@ bot.onText(/\/del (.+)/, function(msg, match) {
 
 	if (index > -1) {
     if(pizzaArray.splice(index, 1)) {
-			var result = "Die Pizza von " + username + " hab ich gelöscht"
+			var result = "Ich habe die Pizza von " + username + " gelöscht"
 		};
 	};
 
@@ -75,22 +76,8 @@ bot.onText(/\/del (.+)/, function(msg, match) {
 
 bot.onText(/\/end/, function(msg, match) {
 	var chat = msg.chat.id;
-
-  var index = pizzaArray.findIndex(function(obj) {
-		return obj.chat_id == chat;
-	});
-
-	if (index > -1) {
-    if(pizzaArray.splice(index, 1)) {
-			var result = true;
-		};
-	};
-  
-  if(result) {
-	  bot.sendMessage(chat, "Sagt einfach bescheid, wenn ihr wieder was zum Essen wollt ;-)");
-  } else {
-    bot.sendMessage(chat, "Yep, ...da war ein Fehler");
-  }
+	pizzaArray = [];
+	bot.sendMessage(chat, "Sagt einfach bescheid, wenn ihr wieder was zum Essen wollt ;-)");
 });
 
 bot.onText(/\/help/, function(msg) {
@@ -166,5 +153,3 @@ bot.onText(/\/subway/, function(msg) {
       bot.sendMessage(chatId, "Welches Gericht willst du?", opts);
     });
 });
-
-//test
