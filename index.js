@@ -166,3 +166,5 @@ bot.onText(/\/subway/, function(msg) {
       bot.sendMessage(chatId, "Welches Gericht willst du?", opts);
     });
 });
+
+//test
