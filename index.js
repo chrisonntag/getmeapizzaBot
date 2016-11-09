@@ -18,7 +18,6 @@ var bot = new TelegramBot(token, {polling: true});
 
 pizzaArray = [];
 
-// Matches /start
 bot.onText(/\/add (.+)/, function (msg, match) {
 	var user = msg.from.id;
  	var resp = match[1];
@@ -76,8 +75,22 @@ bot.onText(/\/del (.+)/, function(msg, match) {
 
 bot.onText(/\/end/, function(msg, match) {
 	var chat = msg.chat.id;
-	pizzaArray = [];
-	bot.sendMessage(chat, "Sagt einfach bescheid, wenn ihr wieder was zum Essen wollt ;-)");
+
+  var index = pizzaArray.findIndex(function(obj) {
+		return obj.chat_id == chat;
+	});
+
+	if (index > -1) {
+    if(pizzaArray.splice(index, 1)) {
+			var result = true;
+		};
+	};
+  
+  if(result) {
+	  bot.sendMessage(chat, "Sagt einfach bescheid, wenn ihr wieder was zum Essen wollt ;-)");
+  } else {
+    bot.sendMessage(chat, "Yep, ...da war ein Fehler");
+  }
 });
 
 bot.onText(/\/help/, function(msg) {
