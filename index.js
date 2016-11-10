@@ -19,27 +19,27 @@ var bot = new TelegramBot(token, {polling: true});
 pizzaArray = [];
 
 bot.onText(/\/add (.+)/, function (msg, match) {
-	var user = msg.from.id;
- 	var resp = match[1];
+  var user = msg.from.id;
+  var resp = match[1];
   var username = msg.from.username || msg.from.first_name || msg.from.last_name;
-	pizzaArray.push(
-		{
-			id : msg.from.id,
+  pizzaArray.push(
+    {
+      id : msg.from.id,
       chat_id: msg.chat.id,
-			first_name: msg.from.first_name,
-			last_name: msg.from.last_name,
-			username: username,
-			pizza: resp
-		}
-	);
-	console.log(pizzaArray);
+      first_name: msg.from.first_name,
+      last_name: msg.from.last_name,
+      username: username,
+      pizza: resp
+    }
+  );
+  console.log(pizzaArray);
 });
 
 bot.onText(/\/pizza/, function(msg, match) {
-	var chat = msg.chat.id;
-	var result = "";
-	if(typeof pizzaArray !== 'undefined' && pizzaArray.length > 0) {
-		for(var i=0;i<pizzaArray.length;i++) {
+  var chat = msg.chat.id;
+  var result = "";
+  if(typeof pizzaArray !== 'undefined' && pizzaArray.length > 0) {
+    for(var i=0;i<pizzaArray.length;i++) {
       if(pizzaArray[i].chat_id == chat) {
         if((pizzaArray[i].first_name != undefined) && (pizzaArray[i].last_name != undefined)) {
           result += pizzaArray[i].first_name + " " + pizzaArray[i].last_name + ": ";
@@ -49,60 +49,60 @@ bot.onText(/\/pizza/, function(msg, match) {
           result += pizzaArray[i].pizza + "\n";
         }
       }
-		}
-	} else {
-		result = "Es wurde noch keine Pizza bestellt :(";
-	}
-	bot.sendMessage(chat, result);
+    }
+  } else {
+    result = "Es wurde noch keine Pizza bestellt :(";
+  }
+  bot.sendMessage(chat, result);
 });
 
 bot.onText(/\/del (.+)/, function(msg, match) {
-	var chat = msg.chat.id;
-	var username = match[1];
+  var chat = msg.chat.id;
+  var username = match[1];
 
-	var index = pizzaArray.findIndex(function(obj) {
-		return obj.username == username;
-	});
+  var index = pizzaArray.findIndex(function(obj) {
+    return obj.username == username;
+  });
 
-	if (index > -1) {
+  if (index > -1) {
     if(pizzaArray.splice(index, 1)) {
-			var result = "Ich habe die Pizza von " + username + " gelöscht"
-		};
-	};
+      var result = "Ich habe die Pizza von " + username + " gelöscht"
+    };
+  };
 
-	bot.sendMessage(chat, result);
+  bot.sendMessage(chat, result);
 });
 
 bot.onText(/\/end/, function(msg, match) {
-	var chat = msg.chat.id;
+  var chat = msg.chat.id;
 
   var index = pizzaArray.findIndex(function(obj) {
-		return obj.chat_id == chat;
-	});
+    return obj.chat_id == chat;
+  });
 
-	if (index > -1) {
+  if (index > -1) {
     if(pizzaArray.splice(index, 1)) {
-			var result = true;
-		};
-	};
+      var result = true;
+    };
+  };
   
   if(result) {
-	  bot.sendMessage(chat, "Sagt einfach bescheid, wenn ihr wieder was zum Essen wollt ;-)");
+    bot.sendMessage(chat, "Sagt einfach bescheid, wenn ihr wieder was zum Essen wollt ;-)");
   } else {
     bot.sendMessage(chat, "Yep, ...da war ein Fehler");
   }
 });
 
 bot.onText(/\/help/, function(msg) {
-	var chat = msg.chat.id;
-	var resp = "Ich biete folgende Befehle an:\n\n";
-	resp += "/help\t listet alle Befehle auf\n";
-	resp += "/add [Name der Pizza]\t fügt der Liste eine Pizza hinzu\n";
-	resp += "/del [Dein username]\t löscht deine aktuell bestellte Pizza\n";
-	resp += "/pizza\t gibt eine Liste mit allen bestellten Pizzen aus\n";
-	resp += "/end\t löscht die gesamte Liste\n";
+  var chat = msg.chat.id;
+  var resp = "Ich biete folgende Befehle an:\n\n";
+  resp += "/help\t listet alle Befehle auf\n";
+  resp += "/add [Name der Pizza]\t fügt der Liste eine Pizza hinzu\n";
+  resp += "/del [Dein username]\t löscht deine aktuell bestellte Pizza\n";
+  resp += "/pizza\t gibt eine Liste mit allen bestellten Pizzen aus\n";
+  resp += "/end\t löscht die gesamte Liste\n";
   resp += "/padu|subway\t zeigt dir die Speisekarte des jeweiligen Restaurants\n";
-	bot.sendMessage(chat, resp);
+  bot.sendMessage(chat, resp);
 });
 
 
