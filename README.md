@@ -1,11 +1,16 @@
 # getmeapizzaBot
 
-## Contributing
+## Setup
 
 Before running ```npm start``` or ```npm test``` you need to set your Telegram API key in the .env file.  
 - Run ```npm setup```
 - Open ```.env``` and paste your API key
 
+In order to make the /[restaurant] command work, you need to grab them from
+their webpages first. Put the required data in the `lib/data.json` file and
+take a look at `lib/menu.sample.js` to see how to download the menu cards.
+
+## Contributing
 
 This repository owns two branches by default  
 
